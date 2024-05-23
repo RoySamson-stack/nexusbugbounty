@@ -1,2 +1,2 @@
 # nexusbugbounty
-pasword root9332
+passowrd rot9332
