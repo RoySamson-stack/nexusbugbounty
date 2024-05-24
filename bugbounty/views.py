@@ -11,7 +11,7 @@ def index(request):
 
 def signup(request):
     if request.method == "POST":
-        form = UserCreatingForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -21,7 +21,7 @@ def signup(request):
             return redirect('/')
         else:
             form = UserCreationForm()
-        return render(request, 'signup.html', {'form': form})
+        return render(request, 'signup.html')
 
 def login_view(request):
     if request.method == 'POST':
