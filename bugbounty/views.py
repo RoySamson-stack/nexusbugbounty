@@ -10,15 +10,19 @@ def index(request):
 
 
 def signup(request):
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('/')
+    def signup(request):
+        if request.method == 'POST':
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password1')
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+                messages.success(request, f'Account created for {username}!')
+                return redirect('home')  # Redirect to a home page or another page
+            else:
+                messages.error(request, 'Please correct the error below.')
         else:
             form = UserCreationForm()
         return render(request, 'signup.html')
